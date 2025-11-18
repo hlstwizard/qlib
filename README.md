@@ -26,10 +26,25 @@ We have prepared several demo videos for you:
 | Quant Factor Mining from reports | [Link](https://rdagent.azurewebsites.net/report_factor?lang=en) | [Link](https://rdagent.azurewebsites.net/report_factor?lang=zh) |
 | Quant Model Optimization | [Link](https://rdagent.azurewebsites.net/model_loop?lang=en) | [Link](https://rdagent.azurewebsites.net/model_loop?lang=zh) |
 
+- 📃**Paper**: [R&D-Agent-Quant: A Multi-Agent Framework for Data-Centric Factors and Model Joint Optimization](https://arxiv.org/abs/2505.15155)
+- 👾**Code**: https://github.com/microsoft/RD-Agent/
+```BibTeX
+@misc{li2025rdagentquant,
+    title={R\&D-Agent-Quant: A Multi-Agent Framework for Data-Centric Factors and Model Joint Optimization},
+    author={Yuante Li and Xu Yang and Xiao Yang and Minrui Xu and Xisen Wang and Weiqing Liu and Jiang Bian},
+    year={2025},
+    eprint={2505.15155},
+    archivePrefix={arXiv},
+    primaryClass={cs.AI}
+}
+```
+![image](https://github.com/user-attachments/assets/3198bc10-47ba-4ee0-8a8e-46d5ce44f45d)
+
 ***
 
 | Feature | Status |
 | --                      | ------    |
+| [R&D-Agent-Quant](https://arxiv.org/abs/2505.15155) Published | Apply R&D-Agent to Qlib for quant trading | 
 | BPQP for End-to-end learning | 📈Coming soon!([Under review](https://github.com/microsoft/qlib/pull/1863)) |
 | 🔥LLM-driven Auto Quant Factory🔥 | 🚀 Released in [♾️RD-Agent](https://github.com/microsoft/RD-Agent) on Aug 8, 2024 |
 | KRNN and Sandwich models | :chart_with_upwards_trend: [Released](https://github.com/microsoft/qlib/pull/1414/) on May 26, 2023 |
@@ -195,7 +210,7 @@ Also, users can install the latest dev version ``Qlib`` by the source code accor
 **Tips for Mac**: If you are using Mac with M1, you might encounter issues in building the wheel for LightGBM, which is due to missing dependencies from OpenMP. To solve the problem, install openmp first with ``brew install libomp`` and then run ``pip install .`` to build it successfully. 
 
 ## Data Preparation
-❗ Due to more restrict data security policy. The offical dataset is disabled temporarily. You can try [this data source](https://github.com/chenditc/investment_data/releases) contributed by the community.
+❗ Due to more restrict data security policy. The official dataset is disabled temporarily. You can try [this data source](https://github.com/chenditc/investment_data/releases) contributed by the community.
 Here is an example to download the latest data.
 ```bash
 wget https://github.com/chenditc/investment_data/releases/latest/download/qlib_bin.tar.gz
@@ -214,10 +229,10 @@ Load and prepare data by running the following code:
 ### Get with module
   ```bash
   # get 1d data
-  python -m qlib.run.get_data qlib_data --target_dir ~/.qlib/qlib_data/cn_data --region cn
+  python -m qlib.cli.data qlib_data --target_dir ~/.qlib/qlib_data/cn_data --region cn
 
   # get 1min data
-  python -m qlib.run.get_data qlib_data --target_dir ~/.qlib/qlib_data/cn_data_1min --region cn --interval 1min
+  python -m qlib.cli.data qlib_data --target_dir ~/.qlib/qlib_data/cn_data_1min --region cn --interval 1min
 
   ```
 
@@ -309,12 +324,12 @@ We recommend users to prepare their own data if they have a high-quality dataset
     ```
 2. Start a new Docker container
     ```bash
-    docker run -it --name <container name> -v <Mounted local directory>:/app qlib_image_stable
+    docker run -it --name <container name> -v <Mounted local directory>:/app pyqlib/qlib_image_stable:stable
     ```
 3. At this point you are in the docker environment and can run the qlib scripts. An example:
     ```bash
     >>> python scripts/get_data.py qlib_data --name qlib_data_simple --target_dir ~/.qlib/qlib_data/cn_data --interval 1d --region cn
-    >>> python qlib/workflow/cli.py examples/benchmarks/LightGBM/workflow_config_lightgbm_Alpha158.yaml
+    >>> python qlib/cli/run.py examples/benchmarks/LightGBM/workflow_config_lightgbm_Alpha158.yaml
     ```
 4. Exit the container
     ```bash
@@ -344,7 +359,7 @@ Qlib provides a tool named `qrun` to run the whole workflow automatically (inclu
     ```
     If users want to use `qrun` under debug mode, please use the following command:
     ```bash
-    python -m pdb qlib/workflow/cli.py examples/benchmarks/LightGBM/workflow_config_lightgbm_Alpha158.yaml
+    python -m pdb qlib/cli/run.py examples/benchmarks/LightGBM/workflow_config_lightgbm_Alpha158.yaml
     ```
     The result of `qrun` is as follows, please refer to [docs](https://qlib.readthedocs.io/en/latest/component/strategy.html#result) for more explanations about the result. 
 
@@ -605,7 +620,7 @@ You can find some impefect implementation in Qlib by  `rg 'TODO|FIXME' qlib`
  
 If you would like to become one of Qlib's maintainers to contribute more (e.g. help merge PR, triage issues), please contact us by email([qlib@microsoft.com](mailto:qlib@microsoft.com)).  We are glad to help to upgrade your permission.
 
-## Licence
+## License
 Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
 the right to use your contribution. For details, visit https://cla.opensource.microsoft.com.
